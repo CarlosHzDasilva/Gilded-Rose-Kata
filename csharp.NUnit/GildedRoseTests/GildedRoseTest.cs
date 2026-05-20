@@ -45,5 +45,29 @@ public class GildedRoseTest
         
         Assert.That(items[0].Quality, Is.Zero);
     }
+
+    [Test]
+    public void ItemQualityDegradesTwiceAsFastWhenSellByDatePassed()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = 0, Quality = 3 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.Negative);
+        Assert.That(items[0].Quality, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public void ItemQualityDegradesTwiceAsFastAndCannotBeNegativeWhenSellByDatePassed()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = -4, Quality = 1 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(-5));
+        Assert.That(items[0].Quality, Is.Zero);
+    }
     }
 }
