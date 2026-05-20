@@ -120,5 +120,52 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(0));
         Assert.That(items[0].Quality, Is.EqualTo(8));
     }
+
+    [Test]
+    public void BackstageQualityIncreaseWhenSellInOver10()
+    {
+        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 7 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(10));
+        Assert.That(items[0].Quality, Is.EqualTo(8));
+    }
+    
+    [Test]
+    public void BackstageQualityIncreaseDoubleWhenSellInIsUnder10()
+    {
+        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 7 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(9));
+        Assert.That(items[0].Quality, Is.EqualTo(9));
+    }
+    
+    [Test]
+    public void BackstageQualityIncreaseTripleWhenSellInIsUnder5()
+    {
+        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 7 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(4));
+        Assert.That(items[0].Quality, Is.EqualTo(10));
+    }
+
+    [Test]
+    public void BackstageQualityDropsToZeroAfterConcert()
+    {
+        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 21 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.Negative);
+        Assert.That(items[0].Quality, Is.EqualTo(0));
     }
 }
