@@ -7,7 +7,7 @@ namespace GildedRoseTests;
 public class GildedRoseTest
 {
     [Test]
-    public void AnItemQualityDecreaseWhenUpdateQualityIsCalled()
+    public void ItemQualityDecreaseWhenUpdateQualityIsCalled()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 1 } };
         var app = new GildedRose(items);
@@ -36,7 +36,7 @@ public class GildedRoseTest
     }
 
     [Test]
-    public void AnItemQualityDecreaseWhenUpdateQualityMultipleTimes()
+    public void ItemQualityDecreaseWhenUpdateQualityMultipleTimes()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 4 } };
         var app = new GildedRose(items);
@@ -94,7 +94,7 @@ public class GildedRoseTest
     }
     
     [Test]
-    public void AnItemSellInDecreaseWhenUpdateQualityMultipleTimes()
+    public void ItemSellInDecreaseWhenUpdateQualityMultipleTimes()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 3 } };
         var app = new GildedRose(items);
