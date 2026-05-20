@@ -69,5 +69,32 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(-5));
         Assert.That(items[0].Quality, Is.Zero);
     }
+
+    [Test]
+    public void ItemSellInDecreaseWhenUpdateQualityIsCalled()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 4 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public void MultipleItemsSellInDecreasesWhenUpdateQualityIsCalled()
+    {
+        var items = new List<Item>
+        {
+            new Item { Name = "An Item", SellIn = 2, Quality = 4 },
+            new Item { Name = "Another Item", SellIn = 1, Quality = 3 }
+        };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(1));
+        Assert.That(items[1].SellIn, Is.Zero);
+    }
     }
 }
