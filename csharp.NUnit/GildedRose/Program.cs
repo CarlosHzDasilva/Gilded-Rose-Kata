@@ -39,7 +39,8 @@ public class Program
             new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
         };
 
-        var app = new GildedRose(items);
+        var itemFactory = new ItemUpdaterFactory();
+        var app = new GildedRoseRefactor.GildedRoseRefactor(items, itemFactory);
 
         int days = 2;
         if (args.Length > 0)
