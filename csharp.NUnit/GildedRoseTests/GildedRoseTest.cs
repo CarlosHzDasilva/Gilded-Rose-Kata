@@ -96,5 +96,17 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(1));
         Assert.That(items[1].SellIn, Is.Zero);
     }
+
+    [Test]
+    public void SulfurasPropertiesNeverChangesWhenUpdateQualityIsCalled()
+    {
+        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.EqualTo(-1));
+        Assert.That(items[0].Quality, Is.EqualTo(80));
+    }
     }
 }
