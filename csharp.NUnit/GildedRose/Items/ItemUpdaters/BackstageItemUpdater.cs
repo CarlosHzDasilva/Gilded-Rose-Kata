@@ -1,6 +1,6 @@
 namespace GildedRoseKata.Items.ItemUpdaters;
 
-public class BackstageItemUpdater
+public class BackstageItemUpdater : ItemUpdater
 {
     public void Update(Item item)
     {

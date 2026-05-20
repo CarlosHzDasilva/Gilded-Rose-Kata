@@ -1,6 +1,6 @@
 namespace GildedRoseKata.Items.ItemUpdaters;
 
-public class AgedItemUpdater
+public class AgedItemUpdater : ItemUpdater
 {
     public void Update(Item item)
     {
