@@ -40,7 +40,7 @@ public class Program
         };
 
         var itemFactory = new ItemUpdaterFactory();
-        var app = new GildedRoseRefactor.GildedRoseRefactor(items, itemFactory);
+        var app = new GildedRose(items, itemFactory);
 
         int days = 2;
         if (args.Length > 0)
