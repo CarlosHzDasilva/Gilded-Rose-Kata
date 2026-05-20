@@ -34,5 +34,16 @@ public class GildedRoseTest
         Assert.That(items[1].Quality, Is.EqualTo(2));
         Assert.That(items[1].Name, Is.EqualTo("Another Item"));
     }
+    
+    [Test]
+    public void QualityCannotBeNegative()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 0 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        
+        Assert.That(items[0].Quality, Is.Zero);
+    }
     }
 }
