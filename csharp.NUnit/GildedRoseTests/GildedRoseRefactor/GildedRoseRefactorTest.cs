@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GildedRoseKata.Items;
 using NUnit.Framework;
@@ -10,9 +11,9 @@ public class GildedRoseRefactorRefactorTest
     public void ItemQualityDecreaseWhenUpdateQualityIsCalled()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 1 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].Quality, Is.Zero);
     }
@@ -25,9 +26,9 @@ public class GildedRoseRefactorRefactorTest
             new Item { Name = "An Item", SellIn = 2, Quality = 4 },
             new Item { Name = "Another Item", SellIn = 3, Quality = 3 }
         };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].Quality, Is.EqualTo(3));
         Assert.That(items[0].Name, Is.EqualTo("An Item"));
@@ -39,10 +40,10 @@ public class GildedRoseRefactorRefactorTest
     public void ItemQualityDecreaseWhenUpdateQualityMultipleTimes()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 4 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
+        app.UpdateQuality();
         
         Assert.That(items[0].Quality, Is.EqualTo(2));
     }
@@ -51,9 +52,9 @@ public class GildedRoseRefactorRefactorTest
     public void QualityCannotBeNegative()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 0 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].Quality, Is.Zero);
     }
@@ -62,9 +63,9 @@ public class GildedRoseRefactorRefactorTest
     public void ItemQualityDegradesTwiceAsFastWhenSellByDatePassed()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 0, Quality = 3 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.Negative);
         Assert.That(items[0].Quality, Is.EqualTo(1));
@@ -74,9 +75,9 @@ public class GildedRoseRefactorRefactorTest
     public void ItemQualityDegradesTwiceAsFastAndCannotBeNegativeWhenSellByDatePassed()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = -4, Quality = 1 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(-5));
         Assert.That(items[0].Quality, Is.Zero);
@@ -86,9 +87,9 @@ public class GildedRoseRefactorRefactorTest
     public void ItemSellInDecreaseWhenUpdateQualityIsCalled()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 4 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(1));
     }
@@ -97,10 +98,10 @@ public class GildedRoseRefactorRefactorTest
     public void ItemSellInDecreaseWhenUpdateQualityMultipleTimes()
     {
         var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 3 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.Zero);
     }
@@ -113,9 +114,9 @@ public class GildedRoseRefactorRefactorTest
             new Item { Name = "An Item", SellIn = 2, Quality = 4 },
             new Item { Name = "Another Item", SellIn = 1, Quality = 3 }
         };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(1));
         Assert.That(items[1].SellIn, Is.Zero);
@@ -125,9 +126,9 @@ public class GildedRoseRefactorRefactorTest
     public void SulfurasPropertiesNeverChangesWhenUpdateQualityIsCalled()
     {
         var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(-1));
         Assert.That(items[0].Quality, Is.EqualTo(80));
@@ -137,9 +138,9 @@ public class GildedRoseRefactorRefactorTest
     public void AgedBrieQualityIncreasesWhenUpdateQualityIsCalled()
     {
         var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 1, Quality = 7 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(0));
         Assert.That(items[0].Quality, Is.EqualTo(8));
@@ -149,9 +150,9 @@ public class GildedRoseRefactorRefactorTest
     public void BackstageQualityIncreaseWhenSellInOver10()
     {
         var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 7 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(10));
         Assert.That(items[0].Quality, Is.EqualTo(8));
@@ -161,9 +162,9 @@ public class GildedRoseRefactorRefactorTest
     public void BackstageQualityIncreaseDoubleWhenSellInIsUnder10()
     {
         var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 7 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(9));
         Assert.That(items[0].Quality, Is.EqualTo(9));
@@ -173,9 +174,9 @@ public class GildedRoseRefactorRefactorTest
     public void BackstageQualityIncreaseTripleWhenSellInIsUnder5()
     {
         var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 7 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(4));
         Assert.That(items[0].Quality, Is.EqualTo(10));
@@ -185,9 +186,9 @@ public class GildedRoseRefactorRefactorTest
     public void BackstageQualityDropsToZeroAfterConcert()
     {
         var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 21 } };
-        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items);
+        var app = new GildedRoseKata.GildedRoseRefactor.GildedRoseRefactor(items, new ItemUpdaterFactory());
         
-        app.UpdateQualityRefactor();
+        app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.Negative);
         Assert.That(items[0].Quality, Is.EqualTo(0));

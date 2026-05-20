@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GildedRoseKata.Items;
+using GildedRoseTests.GildedRoseRefactor;
 
 namespace GildedRoseKata.GildedRoseRefactor;
 
@@ -7,12 +8,12 @@ public class GildedRoseRefactor
 {
     private readonly IList<Item> _items;
 
-    public GildedRoseRefactor(IList<Item> items)
+    public GildedRoseRefactor(IList<Item> items, ItemUpdaterFactory factory)
     {
         _items = items;
     }
     
-    public void UpdateQualityRefactor()
+    public void UpdateQuality()
     {
         foreach (var item in _items)
         {
