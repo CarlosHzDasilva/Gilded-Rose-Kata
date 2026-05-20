@@ -34,6 +34,18 @@ public class GildedRoseTest
         Assert.That(items[1].Quality, Is.EqualTo(2));
         Assert.That(items[1].Name, Is.EqualTo("Another Item"));
     }
+
+    [Test]
+    public void AnItemQualityDecreaseWhenUpdateQualityMultipleTimes()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 4 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        app.UpdateQuality();
+        
+        Assert.That(items[0].Quality, Is.EqualTo(2));
+    }
     
     [Test]
     public void QualityCannotBeNegative()
@@ -79,6 +91,18 @@ public class GildedRoseTest
         app.UpdateQuality();
         
         Assert.That(items[0].SellIn, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public void AnItemSellInDecreaseWhenUpdateQualityMultipleTimes()
+    {
+        var items = new List<Item> { new Item { Name = "An Item", SellIn = 2, Quality = 3 } };
+        var app = new GildedRose(items);
+        
+        app.UpdateQuality();
+        app.UpdateQuality();
+        
+        Assert.That(items[0].SellIn, Is.Zero);
     }
     
     [Test]
