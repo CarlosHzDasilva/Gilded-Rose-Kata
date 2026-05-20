@@ -1,4 +1,4 @@
-﻿namespace GildedRoseKata;
+﻿namespace GildedRoseKata.Items;
 
 public class Item
 {
