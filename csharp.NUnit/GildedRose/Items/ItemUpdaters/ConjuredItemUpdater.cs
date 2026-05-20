@@ -2,7 +2,7 @@ using System;
 
 namespace GildedRoseKata.Items.ItemUpdaters;
 
-public class ConjuredItemUpdater
+public class ConjuredItemUpdater : ItemUpdater
 {
     public void Update(Item item)
     {
