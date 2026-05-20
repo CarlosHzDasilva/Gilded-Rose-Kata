@@ -1,11 +1,10 @@
-using GildedRoseKata.Items;
 using GildedRoseKata.Items.ItemUpdaters;
 
-namespace GildedRoseTests.GildedRoseRefactor;
+namespace GildedRoseKata.Items;
 
 public class ItemUpdaterFactory
 {
-    public ItemUpdater CreateFactory(Item item)
+    public ItemUpdater CreateFor(Item item)
     {
         return item.Name switch
         {
