@@ -8,9 +8,9 @@ public class GildedRose
     private readonly IList<Item> _items;
     private readonly ItemUpdaterFactory _itemUpdaterFactory;
 
-    public GildedRose(IList<Item> items, ItemUpdaterFactory itemUpdaterFactory)
+    public GildedRose(ItemUpdaterFactory itemUpdaterFactory)
     {
-        _items = items;
+        _items = new List<Item>();
         _itemUpdaterFactory = itemUpdaterFactory;
     }
     
