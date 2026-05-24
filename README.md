@@ -1,3 +1,7 @@
+# Development Notes
+The main objective of the Gilded Rose kata was completed in commit **chore: Remove unused files (ab7bdf0)**.  
+From that point onward, subsequent changes focus solely on **refactoring**, **improving readability**, and **exploring design alternatives** without modifying the expected behavior.
+
 # Repository objetive
 This repository contains my personal implementation of the Gilded Rose Kata, focused on practicing disciplined refactoring techniques, incremental design, and safe change strategies.
 The goal is to work with legacy code in a way that preserves existing behavior while improving structure, clarity, and extensibility.
