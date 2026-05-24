@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GildedRoseKata;
 using GildedRoseKata.Items;
 using NUnit.Framework;
@@ -223,5 +224,33 @@ public class GildedRoseTest
         Assert.That(itemsList.Count, Is.EqualTo(2));
         Assert.That(itemsList[0].Name, Is.EqualTo("An Item"));
         Assert.That(itemsList[1].Name, Is.EqualTo("Another Item"));
+    }
+
+    [Test]
+    public void GetNullWhenThereAreNotItemsInInventory()
+    {
+        var itemsList = new List<Item>();
+        var app = new GildedRose(itemsList, new ItemUpdaterFactory());
+        
+        var inventory = app.GetInventory();
+        
+        Assert.That(inventory.Count, Is.Zero);
+    }
+    
+    [Test]
+    public void GetItemListWhenGetInventoryIsCalled()
+    {
+        var itemsList = new List<Item>
+        {
+            new Item { Name = "An Item", SellIn = 11, Quality = 10 },
+            new Item { Name = "Another Item", SellIn = 5, Quality = 11 }
+        };
+        var app = new GildedRose(itemsList, new ItemUpdaterFactory());
+        
+        var inventory = app.GetInventory();
+        
+        Assert.That(inventory.Count, Is.EqualTo(2));
+        Assert.IsTrue(inventory.Any(i => i.Name.Equals("An Item")));
+        Assert.IsTrue(inventory.Any(i => i.Name.Equals("Another Item")));
     }
 }

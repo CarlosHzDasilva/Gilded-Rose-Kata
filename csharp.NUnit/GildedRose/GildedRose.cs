@@ -14,6 +14,11 @@ public class GildedRose
         _itemUpdaterFactory = itemUpdaterFactory;
     }
     
+    public IList<Item> GetInventory()
+    {
+        return _items;
+    }
+    
     public void AddItemToInventory(Item item)
     {
         _items.Add(item);
