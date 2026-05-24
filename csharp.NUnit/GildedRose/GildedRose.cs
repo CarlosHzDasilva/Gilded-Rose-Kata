@@ -14,6 +14,11 @@ public class GildedRose
         _itemUpdaterFactory = itemUpdaterFactory;
     }
     
+    public void AddItemToInventory(Item item)
+    {
+        _items.Add(item);
+    }
+    
     public void UpdateQuality()
     {
         foreach (var item in _items)

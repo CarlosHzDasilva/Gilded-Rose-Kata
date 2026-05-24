@@ -193,4 +193,17 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.Negative);
         Assert.That(items[0].Quality, Is.EqualTo(0));
     }
+    
+    [Test]
+    public void AddOneItemWhenAddItemToInventoryIsCalled()
+    {
+        var itemsList = new List<Item>();
+        var item = new Item { Name = "An Item", SellIn = 0, Quality = 21 };
+        var app = new GildedRose(itemsList, new ItemUpdaterFactory());
+        
+        app.AddItemToInventory(item);
+        
+        Assert.That(itemsList.Count, Is.EqualTo(1));
+        Assert.That(itemsList[0].Name, Is.EqualTo("An Item"));
+    }
 }
