@@ -19,6 +19,14 @@ public class GildedRose
         _items.Add(item);
     }
     
+    public void AddItemToInventory(IList<Item> itemsList)
+    {
+        foreach (var item in itemsList)
+        {
+            _items.Add(item);
+        }
+    }
+    
     public void UpdateQuality()
     {
         foreach (var item in _items)

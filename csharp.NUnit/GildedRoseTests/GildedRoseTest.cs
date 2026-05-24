@@ -206,4 +206,22 @@ public class GildedRoseTest
         Assert.That(itemsList.Count, Is.EqualTo(1));
         Assert.That(itemsList[0].Name, Is.EqualTo("An Item"));
     }
+    
+    [Test]
+    public void AddMultipleItemWhenAddItemToInventoryIsCalled()
+    {
+        var items = new List<Item>();
+        var itemsList = new List<Item>
+        {
+            new Item { Name = "An Item", SellIn = 0, Quality = 21 },
+            new Item { Name = "Another Item", SellIn = 4, Quality = 12 }
+        };
+        var app = new GildedRose(itemsList, new ItemUpdaterFactory());
+        
+        app.AddItemToInventory(items);
+        
+        Assert.That(itemsList.Count, Is.EqualTo(2));
+        Assert.That(itemsList[0].Name, Is.EqualTo("An Item"));
+        Assert.That(itemsList[1].Name, Is.EqualTo("Another Item"));
+    }
 }
